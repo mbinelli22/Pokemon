@@ -38,11 +38,16 @@ public class Charmander extends Pokemon{
 	}
 	
 	public String toString() {
-		
+		return "Charmander [name=" + this.name + ", health=" + this.currentHealth + ", power=" + this.currentPower + "]";
 	}
 	
 	public boolean equals(Object other) {
-		
+		if (!(other instanceof Charmander)) {
+			return false;
+		}
+		Charmander mander = (Charmander) other;
+		return mander.currentHealth == this.currentHealth && mander.currentPower == this.currentPower
+				&& mander.name.equals(this.name);
 	}
 
 }

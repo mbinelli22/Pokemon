@@ -38,11 +38,15 @@ public class Vulpix extends Pokemon{
 	}
 	
 	public String toString() {
-		
+		return "Vulpix [name=" + this.name + ", health=" + this.currentHealth + ", power=" + this.currentPower + "]";
 	}
 	
 	public boolean equals(Object other) {
-		
+		if (!(other instanceof Vulpix))
+			return false;
+		Vulpix vulp = (Vulpix) other;
+		return vulp.currentHealth == this.currentHealth && vulp.currentPower == this.currentPower
+				&& vulp.name.equals(this.name);
 	}
 	
 }

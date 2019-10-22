@@ -38,11 +38,16 @@ public class Pikachu extends Pokemon{
 	}
 	
 	public String toString() {
-		
+		return "Pikachu [name=" + this.name + ", health=" + this.currentHealth + ", power=" + this.currentPower + "]";
 	}
 	
 	public boolean equals(Object other) {
-		
+		if (!(other instanceof Pikachu)) {
+			return false;
+		}
+		Pikachu pik = (Pikachu) other;
+		return pik.currentHealth == this.currentHealth && pik.currentPower == this.currentPower
+				&& pik.name.equals(this.name);
 	}
 
 }
