@@ -94,8 +94,6 @@ public class Animations extends JPanel {
 	
 	
 
-	
-	
 	public void pikaAttackAnim() {
 		playClip(hit_1);
 		pikachu.setImage(pika2);
