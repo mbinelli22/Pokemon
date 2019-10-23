@@ -68,6 +68,7 @@ public class Driver {
 		default: return "Incorrect format";
 		}
 	}
+	
 	/**
 	 * Print out all pokemon in the 2D array.
 	 * The first row is the player one, the second row is player two.
