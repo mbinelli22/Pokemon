@@ -14,6 +14,33 @@ public class Driver {
 		//		- No duplicate pokemon are allowed throughout the entire 2D array.
 		//		- It is ok if your program crashes if you use Integer.parseInt().
 		
+		int totalPokemon = arrOfPokemons.length * arrOfPokemons[0].length;
+
+		Pokemon pokemon = null;
+		int i = 0, j = 0, totalAdded = 0;
+		while (totalAdded < totalPokemon) {
+			do {
+				System.out.printf("Enter name, health, and power to create the %s Pokemon for Player %s: "
+						,returnValue(totalAdded), i == 0 ? "One":"Two");
+				String[] entry = stdIn.nextLine().split(" ");
+
+				String name = entry[0].trim();
+				int health = Integer.parseInt(entry[1].trim());
+				int power = Integer.parseInt(entry[2].trim());
+
+				pokemon = makePokemon(name, health, power);
+
+			} while (pokemon == null || contains(pokemon, arrOfPokemons));
+
+			arrOfPokemons[i][j++] = pokemon;
+			totalAdded++;
+			if(j == arrOfPokemons[i].length) {
+				i++;
+				j=0;
+			}
+		}
+
+		
 		System.out.println();
 
 		System.out.println("Pokemons before playing");
@@ -29,7 +56,18 @@ public class Driver {
 
 		stdIn.close();
 	}
-
+	
+	private static String returnValue(int x) {
+		switch(x) {
+		case 0:
+		case 3: return "First";
+		case 1:
+		case 4: return "Second";
+		case 2:
+		case 5: return "Third";
+		default: return "Incorrect format";
+		}
+	}
 	/**
 	 * Print out all pokemon in the 2D array.
 	 * The first row is the player one, the second row is player two.
@@ -38,11 +76,14 @@ public class Driver {
 	 * @param arrOfPokemons
 	 */
 	private static void print(Pokemon[][] arrOfPokemons){
-
-		//TODO
+		for (int i = 0; i < arrOfPokemons.length; i++) {
+			System.out.printf("Player %s list of Pokemon:\n", i == 0 ? "One's":"Two's");
+			for(int j = 0; j < arrOfPokemons[i].length; j++) {
+				System.out.printf("\t%d: %s\n", j+1, arrOfPokemons[i][j].toString());
+			}
+		}
 
 	}
-
 	/**
 	 * Very basic implemenation of a pokemon game.
 	 * Player one and two randomly selects a Pokemon from their deck.
@@ -92,7 +133,6 @@ public class Driver {
 		}
 
 	}
-
 	/**
 	 * Create a Pokemon based on the name, health, and power passed in.
 	 * The type of pokemon created is based on the name.
@@ -104,8 +144,19 @@ public class Driver {
 	 * @return
 	 */
 	static Pokemon makePokemon(String name, int health, int power) {
+		if(name == null) return null;
+		
+			name = name.toLowerCase();
 
-		//TODO
+			if(name.equals("pikachu")) {
+				return new Pikachu(health, power); 
+			} else if (name.equals("charmander")) {
+				return new Charmander(health, power);
+			} else if (name.equals("vulpix")) {
+				return new Vulpix(health, power);
+			} else{
+				return null;
+			}
 
 	}
 
@@ -119,8 +170,14 @@ public class Driver {
 	 * @return
 	 */
 	static boolean contains(Pokemon pok, Pokemon[][] arrOfPokemons) {
-
-		//TODO
+		if(pok == null) return false;
+		for (Pokemon[] player : arrOfPokemons) {
+			for(Pokemon pokemon: player) {
+				if (pok.equals(pokemon))
+					return true;
+			}
+		}
+		return false;
 		
 	}
 }
